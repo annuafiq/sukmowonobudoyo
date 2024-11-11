@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notasi Gamelan Jawa</title>
+    <style>
+        /* Font and Background */
+        body {
+            font-family: 'Garamond', serif;
+            background-color: #fdf6e3;
+            color: #4f4f4f;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            background-color: #6a4e1f;
+            padding: 20px 0;
+            color: white;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            color: #ffdb58;
+        }
+
+        /* Hero Section */
+        section#hero {
+            background: url('background-jawa.jpg') no-repeat center center fixed;
+            background-size: cover;
+            padding: 150px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        section#hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        section#hero p {
+            font-size: 24px;
+        }
+
+        /* Pencarian */
+        #search-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #search-box {
+            padding: 15px;
+            font-size: 16px;
+            width: 60%;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff3e1;
+        }
+
+        #search-box:focus {
+            border-color: #6a4e1f;
+            outline: none;
+        }
+
+        /* Notasi Gamelan Section */
+        section#notasi-list {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #fff8e1;
+        }
+
+        section#notasi-list h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #6a4e1f;
+        }
+
+        section#notasi-list p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .notasi-item {
+            display: inline-block;
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #6a4e1f;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .notasi-item h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+
+        .notasi-item .pdf-viewer {
+            width: 100%;
+            height: 800px; /* Height for full-size viewing */
+            border: none;
+            margin-top: 20px;
+        }
+
+        .notasi-item button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #6a4e1f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .notasi-item button:hover {
+            background-color: #ffdb58;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #6a4e1f;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .notasi-item {
+                width: 90%;
+            }
+
+            #search-box {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Notasi Gamelan Jawa</h1>
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#notasi-list">Notasi</a></li>
+            <li><a href="#about">Tentang</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section id="hero">
+    <h2>Selamat datang di Notasi Gamelan</h2>
+    <p>Pelajari dan temukan koleksi notasi gamelan tradisional Jawa.</p>
+</section>
+
+<!-- Fitur Pencarian -->
+<section id="search-container">
+    <input type="text" id="search-box" placeholder="Cari notasi gamelan..." onkeyup="searchNotations()">
+</section>
+
+<!-- Notasi Gamelan List -->
+<section id="notasi-list">
+    <div class="notasi-item" data-name="Suket Mayang">
+        <h3>Suket Mayang</h3>
+        <p>Notasi gamelan untuk lagu Suket Mayang yang menggambarkan keindahan alam Jawa.</p>
+    
+        <!-- Link to PDF for Suket Mayang -->
+        <button onclick="window.location.href='notasi gamelan gugur gunung.pdf'">Lihat Notasi</button>
+    </div>
+    
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Notasi Gamelan | Hak Cipta Dilindungi</p>
+</footer>
+
+<script>
+    // Fitur Pencarian
+    function searchNotations() {
+        var input, filter, notasiList, items, item, i, txtValue;
+        input = document.getElementById('search-box');
+        filter = input.value.toLowerCase();
+        notasiList = document.getElementById('notasi-list');
+        items = notasiList.getElementsByClassName('notasi-item');
+        
+        for (i = 0; i < items.length; i++) {
+            item = items[i];
+            txtValue = item.textContent || item.innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
